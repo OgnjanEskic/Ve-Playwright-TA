@@ -80,7 +80,7 @@ namespace GreenCoreS21.Utilities
         /// Instantiate the browser if the browser is missing.
         /// </summary>
         /// <returns>An instance of the browser.</returns>
-        public IBrowser GetPlaywrightBrowser()
+        public static IBrowser GetPlaywrightBrowser()
         {
             if (browser == null)
             {

@@ -2,6 +2,9 @@
 
 namespace GreenCoreS21.Utilities
 {
+    /// <summary>
+    /// Responsible for creating the instance of the browser context and page objects.
+    /// </summary>
     public class PageFactory
     {
         public IBrowserContext? browserContext;
@@ -16,7 +19,7 @@ namespace GreenCoreS21.Utilities
         {
             string url = JsonExtractor.GetJsonValue("BaseUrl");
             long pageTimeout = (long)Convert.ToDouble(JsonExtractor.GetJsonValue("PageTimeout"));
-            browserContext = await PlaywrightFactory.PlaywrightSingleton.GetPlaywrightBrowser().NewContextAsync();
+            browserContext = await PlaywrightFactory.GetPlaywrightBrowser().NewContextAsync();
             page = await browserContext.NewPageAsync();
             page.SetDefaultTimeout(pageTimeout);
             await page.GotoAsync(url + urlSuffix);
