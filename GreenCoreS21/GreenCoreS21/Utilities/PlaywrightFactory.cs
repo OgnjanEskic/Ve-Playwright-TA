@@ -7,9 +7,9 @@ namespace GreenCoreS21.Utilities
     /// </summary>
     public sealed class PlaywrightFactory
     {
-        private static PlaywrightFactory instance;
+        private static PlaywrightFactory? instance;
         private static Lazy<IPlaywright> playwright = new Lazy<IPlaywright>(() => Playwright.CreateAsync().Result);
-        private static IBrowser browser;
+        private static IBrowser? browser;
         public static PlaywrightFactory PlaywrightSingleton
         {
             get
