@@ -16,7 +16,7 @@ namespace GreenCoreS21.Tests
         [Test]
         public async Task TestPage()
         {
-            await pageFactory.page.GotoAsync("https://doodles.google/");
+            await pageFactory.page!.GotoAsync("https://doodles.google/");
             Assert.Pass();
         }
     }
