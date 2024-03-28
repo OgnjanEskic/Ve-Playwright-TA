@@ -5,7 +5,7 @@ namespace GreenCoreS21.Tests
     [TestFixture]
     public class TestClass
     {
-        PageFactory pageFactory = new PageFactory("");
+        PageFactory pageFactory = new("");
 
         [TearDown]
         public async Task Teardown()

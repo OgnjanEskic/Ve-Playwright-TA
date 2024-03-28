@@ -9,7 +9,7 @@ namespace GreenCoreS21.Utilities
     public sealed class PlaywrightFactory
     {
         private static PlaywrightFactory? instance;
-        private static Lazy<IPlaywright> playwright = new Lazy<IPlaywright>(() => Playwright.CreateAsync().Result);
+        private static readonly Lazy<IPlaywright> playwright = new(() => Playwright.CreateAsync().Result);
         private static IBrowser? browser;
 
         /// <summary>
@@ -27,10 +27,7 @@ namespace GreenCoreS21.Utilities
         {
             get
             {
-                if (instance == null)
-                {
-                    instance = new PlaywrightFactory();
-                }
+                instance ??= new PlaywrightFactory();
                 return instance;
             }
         }
@@ -42,37 +39,25 @@ namespace GreenCoreS21.Utilities
         private static IBrowser PlaywrightBrowserType()
         {
             string browserName = JsonExtractor.GetJsonValue("Browser");
-            switch (browserName)
+            browser = browserName switch
             {
-                case BrowserType.Firefox:
-                    browser = playwright.Value.Firefox.LaunchAsync(new BrowserTypeLaunchOptions()
-                    {
-                        Headless = false,
-                    }).Result;
-                    break;
-
-                case BrowserType.Chromium:
-                    browser = playwright.Value.Chromium.LaunchAsync(new BrowserTypeLaunchOptions()
-                    {
-                        Headless = false,
-                    }).Result;
-                    break;
-
-                case BrowserType.Webkit:
-                    browser = playwright.Value.Webkit.LaunchAsync(new BrowserTypeLaunchOptions()
-                    {
-                        Headless = false,
-                    }).Result;
-                    break;
-
-                default:
-                    browser = playwright.Value.Chromium.LaunchAsync(new BrowserTypeLaunchOptions()
-                    {
-                        Headless = false,
-                    }).Result;
-                    break;
-            }
-
+                BrowserType.Firefox => playwright.Value.Firefox.LaunchAsync(new BrowserTypeLaunchOptions()
+                {
+                    Headless = false,
+                }).Result,
+                BrowserType.Chromium => playwright.Value.Chromium.LaunchAsync(new BrowserTypeLaunchOptions()
+                {
+                    Headless = false,
+                }).Result,
+                BrowserType.Webkit => playwright.Value.Webkit.LaunchAsync(new BrowserTypeLaunchOptions()
+                {
+                    Headless = false,
+                }).Result,
+                _ => playwright.Value.Chromium.LaunchAsync(new BrowserTypeLaunchOptions()
+                {
+                    Headless = false,
+                }).Result,
+            };
             return browser;
         }
 
@@ -82,10 +67,7 @@ namespace GreenCoreS21.Utilities
         /// <returns>An instance of the browser.</returns>
         public static IBrowser GetPlaywrightBrowser()
         {
-            if (browser == null)
-            {
-                browser = PlaywrightBrowserType();
-            }
+            browser ??= PlaywrightBrowserType();
             return browser;
         }
     }
