@@ -10,6 +10,10 @@ namespace GreenCoreS21.Utilities
         public IBrowserContext? browserContext;
         public IPage? page;
 
+        /// <summary>
+        /// PageFactory constructor.
+        /// </summary>
+        /// <param name="urlSuffix"></param>
         public PageFactory(string urlSuffix)
         {
             NavigateToPage(urlSuffix).Wait();
