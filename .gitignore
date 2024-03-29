@@ -400,3 +400,7 @@ FodyWeavers.xsd
 # Images
 *.png
 /.vscode
+/GreenCoreS21/.vs/ProjectEvaluation/greencores21.projects.v7.bin
+/GreenCoreS21/.vs/ProjectEvaluation/greencores21.metadata.v7.bin
+/GreenCoreS21/.vs/GreenCoreS21/v17/.futdcache.v2
+/GreenCoreS21/.vs/GreenCoreS21/v17/TestStore/0/testlog.manifest
