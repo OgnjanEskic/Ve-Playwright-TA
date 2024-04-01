@@ -3,9 +3,9 @@
 namespace GreenCoreS21.Tests
 {
     [TestFixture]
-    public class TestClass
+    public sealed class TestClass
     {
-        PageFactory pageFactory = new("");
+        readonly PageFactory pageFactory = new("");
 
         [TearDown]
         public async Task Teardown()
@@ -16,8 +16,10 @@ namespace GreenCoreS21.Tests
         [Test]
         public async Task TestPage()
         {
-            await pageFactory.Page!.GotoAsync("https://doodles.google/");
-            Assert.Pass();
+            Assert.That(pageFactory.Page!.Locator("#APjFqb").IsVisibleAsync().Result, Is.True);
+            await pageFactory.Page.GotoAsync("https://doodles.google/");
+            Assert.That(pageFactory.Page!.Locator(".glue-header__link").First.IsVisibleAsync().Result, Is.True);
+
         }
     }
 }

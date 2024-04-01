@@ -3,9 +3,9 @@
 namespace GreenCoreS21.Tests
 {
     [TestFixture]
-    public class TestClass2
+    public sealed class TestClass2
     {
-        PageFactory pageFactory = new("");
+        readonly PageFactory pageFactory = new("");
 
         [TearDown]
         public async Task Teardown()
