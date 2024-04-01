@@ -7,8 +7,15 @@ namespace GreenCoreS21.Utilities
     /// </summary>
     public class PageFactory
     {
-        public IBrowserContext? browserContext;
-        public IPage? page;
+        /// <summary>
+        /// Gets or sets the browser context.
+        /// </summary>
+        public IBrowserContext? BrowserContext { get; set; }
+
+        /// <summary>
+        /// Gets or sets the page.
+        /// </summary>
+        public IPage? Page { get; set; }
 
         /// <summary>
         /// PageFactory constructor.
@@ -23,10 +30,10 @@ namespace GreenCoreS21.Utilities
         {
             string url = JsonExtractor.GetSingleJsonValue("BaseUrl");
             long pageTimeout = (long)Convert.ToDouble(JsonExtractor.GetSingleJsonValue("PageTimeout"));
-            browserContext = await PlaywrightFactory.GetPlaywrightBrowser().NewContextAsync();
-            page = await browserContext.NewPageAsync();
-            page.SetDefaultTimeout(pageTimeout);
-            await page.GotoAsync(url + urlSuffix);
+            BrowserContext = await PlaywrightFactory.GetPlaywrightBrowser().NewContextAsync();
+            Page = await BrowserContext.NewPageAsync();
+            Page.SetDefaultTimeout(pageTimeout);
+            await Page.GotoAsync(url + urlSuffix);
         }
     }
 }

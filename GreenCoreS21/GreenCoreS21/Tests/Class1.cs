@@ -10,13 +10,13 @@ namespace GreenCoreS21.Tests
         [TearDown]
         public async Task Teardown()
         {
-            await pageFactory.browserContext!.DisposeAsync();
+            await pageFactory.BrowserContext!.DisposeAsync();
         }
 
         [Test]
         public async Task TestPage()
         {
-            await pageFactory.page!.GotoAsync("https://doodles.google/");
+            await pageFactory.Page!.GotoAsync("https://doodles.google/");
             Assert.Pass();
         }
     }
