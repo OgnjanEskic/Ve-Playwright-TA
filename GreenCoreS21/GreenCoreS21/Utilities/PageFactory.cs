@@ -21,8 +21,8 @@ namespace GreenCoreS21.Utilities
 
         private async Task NavigateToPage(string urlSuffix)
         {
-            string url = JsonExtractor.GetJsonValue("BaseUrl");
-            long pageTimeout = (long)Convert.ToDouble(JsonExtractor.GetJsonValue("PageTimeout"));
+            string url = JsonExtractor.GetSingleJsonValue("BaseUrl");
+            long pageTimeout = (long)Convert.ToDouble(JsonExtractor.GetSingleJsonValue("PageTimeout"));
             browserContext = await PlaywrightFactory.GetPlaywrightBrowser().NewContextAsync();
             page = await browserContext.NewPageAsync();
             page.SetDefaultTimeout(pageTimeout);

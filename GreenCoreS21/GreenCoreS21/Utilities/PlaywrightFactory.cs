@@ -38,7 +38,7 @@ namespace GreenCoreS21.Utilities
         /// <returns>An instance of the browser.</returns>
         private static IBrowser PlaywrightBrowserType()
         {
-            string browserName = JsonExtractor.GetJsonValue("Browser");
+            string browserName = JsonExtractor.GetSingleJsonValue("Browser");
             browser = browserName switch
             {
                 BrowserType.Firefox => playwright.Value.Firefox.LaunchAsync(new BrowserTypeLaunchOptions()
