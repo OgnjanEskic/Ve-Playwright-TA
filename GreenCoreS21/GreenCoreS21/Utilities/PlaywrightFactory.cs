@@ -8,29 +8,8 @@ namespace GreenCoreS21.Utilities
     /// </summary>
     public sealed class PlaywrightFactory
     {
-        private static PlaywrightFactory? instance;
         private static readonly Lazy<IPlaywright> playwright = new(() => Playwright.CreateAsync().Result);
         private static IBrowser? browser;
-
-        /// <summary>
-        /// PlaywrightFactory private constructor.
-        /// </summary>
-        private PlaywrightFactory()
-        {
-        }
-
-        /// <summary>
-        /// Gets the PlaywrightSingleton by calling PlaywrightFactory() private constructor
-        /// who populate static instance field of the PlaywrightFactory.
-        /// </summary>
-        public static PlaywrightFactory PlaywrightSingleton
-        {
-            get
-            {
-                instance ??= new PlaywrightFactory();
-                return instance;
-            }
-        }
 
         /// <summary>
         /// Chooses the browser type by reading appsettings file where preferred browser type is written into.
