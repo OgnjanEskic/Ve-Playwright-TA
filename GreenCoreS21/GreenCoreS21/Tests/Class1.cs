@@ -16,10 +16,9 @@ namespace GreenCoreS21.Tests
         [Test]
         public async Task TestPage()
         {
-            Assert.That(pageFactory.Page!.Locator("#APjFqb").IsVisibleAsync().Result, Is.True);
+            Assert.That(await pageFactory.Page!.Locator("#APjFqb").IsVisibleAsync(), Is.True);
             await pageFactory.Page.GotoAsync("https://doodles.google/");
-            Assert.That(pageFactory.Page!.Locator(".glue-header__link").First.IsVisibleAsync().Result, Is.True);
-
+            Assert.That(await pageFactory.Page!.Locator(".glue-header__link").First.IsVisibleAsync(), Is.True);
         }
     }
 }
