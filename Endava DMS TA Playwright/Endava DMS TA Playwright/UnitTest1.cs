@@ -5,7 +5,7 @@ namespace Endava_DMS_TA_Playwright
     public class Tests : PageTest
     {
         [Test]
-        public async Task HomepageHasPlaywrightInTitleAndGetStartedLinkLinkingtoTheIntroPage()
+        public async Task HomepageHasPlaywrightInTitleAndGetStartedLinkLinkingToTheIntroPage()
         {
             await Page.GotoAsync("https://playwright.dev");
 
