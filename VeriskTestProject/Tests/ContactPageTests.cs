@@ -63,6 +63,7 @@ namespace VeriskTestProject.Tests
 
             //Assert
             var elementText = await inputLocator.Locator("~ span").InnerTextAsync();
+            await inputLocator.ClearAsync(); //To be removed when parallelization is made.
             Assert.That(emailValidationMessage, Is.EqualTo(elementText));
         }
 
