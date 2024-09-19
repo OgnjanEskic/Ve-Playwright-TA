@@ -61,10 +61,34 @@ namespace VeriskTestProject.Tests
             await inputLocator.FillAsync(email);
             await Page.WaitForSelectorAsync($"span:has-text('{emailValidationMessage}')");
 
+            //Assert
             var elementText = await inputLocator.Locator("~ span").InnerTextAsync();
+            Assert.That(emailValidationMessage, Is.EqualTo(elementText));
+        }
+
+        [Test]
+        public async Task EnquiryTypeDropdown_HasAllValuesCheck()
+        {
+            //Arrange
+            var enquiryDropdownHashSet = new HashSet<string>
+            {
+                EnquiryTypeItems.ProductSuite,
+                EnquiryTypeItems.DigitalSolutions,
+                EnquiryTypeItems.BlueprintTwo,
+                EnquiryTypeItems.Partnership,
+                EnquiryTypeItems.Recruitment,
+                EnquiryTypeItems.EventsMarketing,
+                EnquiryTypeItems.Other
+            };
+
+            //Act
+            var optionTexts = await Page.Locator("select[name='648e5301-4f3a-4bd7-c5cd-2013d20483d5'] option")
+                .AllInnerTextsAsync();
 
             //Assert
-            Assert.That(emailValidationMessage, Is.EqualTo(elementText));
+            var optionsHashSet = new HashSet<string>(optionTexts); //Unused, options with blank option included.
+            var filteredOptionsHashSet = optionTexts.Where(text => !string.IsNullOrWhiteSpace(text)).ToHashSet();
+            Assert.That(enquiryDropdownHashSet, Is.EquivalentTo(filteredOptionsHashSet), "Some options are missing inside <select> element.");
         }
 
         private async Task<bool> AreAllItemsMandatoryAsync(IPage page)
