@@ -56,14 +56,15 @@ namespace VeriskTestProject.Tests
 
             //Act
             await Page.WaitForSelectorAsync(inputName);
-            await Page.Locator(inputName).ClickAsync();
-            await Page.Locator(inputName).FillAsync(email);
+            var inputLocator = Page.Locator(inputName);
+            await inputLocator.ClickAsync();
+            await inputLocator.FillAsync(email);
             await Page.WaitForSelectorAsync($"span:has-text('{emailValidationMessage}')");
 
-            //var emailValidationMessage = await Page.GetByLabel("Please provide a valid email address");
+            var elementText = await inputLocator.Locator("~ span").InnerTextAsync();
 
             //Assert
-            //Assert.That(emailValidationMessage, "sda");
+            Assert.That(emailValidationMessage, Is.EqualTo(elementText));
         }
 
         private async Task<bool> AreAllItemsMandatoryAsync(IPage page)
