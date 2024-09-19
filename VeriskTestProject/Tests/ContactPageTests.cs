@@ -5,7 +5,7 @@ using VeriskTestProject.Core.Entities;
 namespace VeriskTestProject.Tests
 {
     [TestFixture]
-    [Parallelizable(ParallelScope.All)]
+    //[Parallelizable(ParallelScope.All)]
     public sealed class ContactPageTests : BaseTest
     {
         private List<string> _mandatoryList;
